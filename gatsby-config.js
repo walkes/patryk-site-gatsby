@@ -13,8 +13,8 @@ module.exports = {
     infoData: infoData
   },
   plugins: [
+    "gatsby-plugin-emotion",
     "gatsby-plugin-sass",
-    "gatsby-transformer-remark",
     "gatsby-plugin-react-helmet",
     "gatsby-transformer-yaml",
     {
@@ -27,8 +27,8 @@ module.exports = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        name: "posts",
-        path: `${__dirname}/content/posts`
+        name: "markdown-pages",
+        path: `${__dirname}/src/markdown-pages`
       }
     },
     {
@@ -53,20 +53,40 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          "gatsby-remark-relative-images",
-          "gatsby-remark-normalize-paths",
+          // gatsby-remark-relative-images must go before gatsby-remark-images
           {
-            resolve: "gatsby-remark-images",
+            resolve: `gatsby-remark-relative-images`,
             options: {
-              maxWidth: 1000,
-              linkImagesToOriginal: false,
+              // [Optional] The root of "media_folder" in your config.yml
+              // Defaults to "static"
+              staticFolderName: 'content'
             },
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: { maxWidth: 1024 },
           },
         ],
       },
     },
+    // {
+    //   resolve: "gatsby-transformer-remark",
+    //   options: {
+    //     plugins: [
+    //       "gatsby-remark-relative-images",
+    //       "gatsby-remark-normalize-paths",
+    //       {
+    //         resolve: "gatsby-remark-images",
+    //         options: {
+    //           maxWidth: 1000,
+    //           linkImagesToOriginal: false,
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
   ],
 }

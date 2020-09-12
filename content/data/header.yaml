@@ -1,0 +1,9 @@
+title: "Patryk Pastewka"
+backgroundImage: "/content/images/foto_patryk.png"
+pages:
+  - title: "O mnie"
+    href: "/about"
+  - title: "Usługi"
+    href: "/services"
+  - title: "Kontakt"
+    href: "/contact"
